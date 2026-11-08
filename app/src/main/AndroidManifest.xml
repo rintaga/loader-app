@@ -4,7 +4,7 @@
     <queries><package android:name="com.mojang.minecraftpe" /></queries>
     <application
         android:name=".LoaderApp"
-        android:label="Loader"
+        android:label="JSLOADER"
         android:icon="@android:drawable/ic_menu_manage"
         android:largeHeap="true"
         android:hardwareAccelerated="true"

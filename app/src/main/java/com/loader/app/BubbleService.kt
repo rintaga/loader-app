@@ -34,7 +34,7 @@ class BubbleService : Service() {
         val d = resources.displayMetrics.density
         val size = (64 * d).toInt()
         val tv = TextView(this).apply {
-            text = "LOADER"; textSize = 9f; setTextColor(Color.WHITE); gravity = Gravity.CENTER
+            text = "JSLOADER"; textSize = 8f; setTextColor(Color.WHITE); gravity = Gravity.CENTER
             setTypeface(typeface, android.graphics.Typeface.BOLD)
             background = GradientDrawable().apply { shape = GradientDrawable.OVAL; setColor(0xE61E88E5.toInt()) }
         }

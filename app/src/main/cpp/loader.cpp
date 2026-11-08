@@ -246,7 +246,7 @@ static void drawMenu(int w, int h) {
     ImGui_ImplOpenGL3_NewFrame(); ImGui::NewFrame();
     ImGui::SetNextWindowPos(ImVec2(w * 0.12f, h * 0.05f), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(w * 0.55f, h * 0.85f), ImGuiCond_FirstUseEver);
-    ImGui::Begin("LOADER");
+    ImGui::Begin("JSLOADER");
     ImVec2 p = ImGui::GetWindowPos(), sz = ImGui::GetWindowSize(); g_rect[0] = p.x; g_rect[1] = p.y; g_rect[2] = sz.x; g_rect[3] = sz.y;
     if (ImGui::Button("Impor Shader ZIP", ImVec2(-1, 0))) callImport();
     ImGui::Separator(); ImGui::Text("ZIP yang sudah diimpor:");
