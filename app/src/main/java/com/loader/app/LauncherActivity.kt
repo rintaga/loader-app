@@ -40,7 +40,7 @@ class LauncherActivity : Activity() {
         sb.append("ABI: ").append(Build.SUPPORTED_ABIS.joinToString()).append("  SDK ").append(Build.VERSION.SDK_INT)
         sb.append("  proses64=").append(android.os.Process.is64Bit()).append('\n')
         try {
-            val pi = packageManager.getPackageInfo(McInject.PKG, 0)
+            McInject.detect(this); val pi = packageManager.getPackageInfo(McInject.PKG, 0)
             sb.append("Minecraft: ").append(pi.versionName).append(" (").append(pi.versionCode).append(")\n")
             sb.append("splits: ").append(pi.applicationInfo.splitSourceDirs?.size ?: 0).append('\n')
         } catch (t: Throwable) { sb.append("Minecraft TIDAK terdeteksi\n") }

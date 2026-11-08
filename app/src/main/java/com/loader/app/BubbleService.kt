@@ -60,6 +60,7 @@ class BubbleService : Service() {
     }
 
     private fun onClick() {
+        if (!McInject.ready) { android.widget.Toast.makeText(this, "Minecraft Bedrock tidak terdeteksi. Pasang dulu, lalu buka Loader lagi.", android.widget.Toast.LENGTH_LONG).show(); return }
         if (HostActivity.instance != null) Native.toggleMenu()          // game jalan -> buka/tutup ImGui
         else startActivity(Intent(this, HostActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) // belum -> jalankan Minecraft
     }

@@ -5,7 +5,8 @@ object Native {
     @JvmStatic external fun toggleMenu()
 }
 
-/** Dipanggil dari C++ (kelas ini sengaja tidak turunan Mojang agar FindClass aman di JNI_OnLoad). */
 object Bridge {
-    @JvmStatic fun requestImport() = HostActivity.requestImport()
+    @JvmStatic fun requestImport() {
+        try { Class.forName("com.loader.app.HostActivity").getMethod("requestImport").invoke(null) } catch (_: Throwable) {}
+    }
 }
