@@ -1,0 +1,28 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <queries><package android:name="com.mojang.minecraftpe" /></queries>
+    <application
+        android:name=".LoaderApp"
+        android:label="Loader"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:largeHeap="true"
+        android:hardwareAccelerated="true"
+        android:extractNativeLibs="true">
+        <activity android:name=".LauncherActivity" android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".HostActivity" android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode|keyboard|navigation|density">
+            <meta-data android:name="android.app.lib_name" android:value="minecraftpe" />
+        </activity>
+        <service android:name=".BubbleService" android:exported="false" />
+    </application>
+</manifest>
