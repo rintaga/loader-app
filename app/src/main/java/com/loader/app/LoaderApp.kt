@@ -7,9 +7,15 @@ import android.util.Log
 class LoaderApp : Application() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
-        try { McInject.run(this) } catch (t: Throwable) { Log.e("LOADER", "inject gagal (Minecraft terpasang?)", t) }
-        // dimuat SEBELUM libminecraftpe.so; JNI_OnLoad memasang hook
-        System.loadLibrary("customloader")
-        Native.init(ShaderImporter.root(this).apply { mkdirs() }.path)
+        val prev = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler { t, e ->
+            CrashLog.write(this, "CRASH thread " + t.name + ":\n" + Log.getStackTraceString(e))
+            prev?.uncaughtException(t, e)
+        }
+        try { McInject.run(this) } catch (t: Throwable) { CrashLog.write(this, "INJECT GAGAL:\n" + Log.getStackTraceString(t)) }
+        try {
+            System.loadLibrary("customloader")
+            Native.init(ShaderImporter.root(this).apply { mkdirs() }.path)
+        } catch (t: Throwable) { CrashLog.write(this, "LOAD customloader GAGAL:\n" + Log.getStackTraceString(t)) }
     }
 }
