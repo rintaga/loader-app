@@ -7,9 +7,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
-      - uses: gradle/actions/setup-gradle@v4
-        with: { gradle-version: 8.7 }
+      - name: Gradle 8.7
+        run: |
+          curl -fsSL --retry 8 --retry-delay 10 --retry-all-errors -o g.zip https://services.gradle.org/distributions/gradle-8.7-bin.zip
+          unzip -q g.zip -d $HOME
+          echo "$HOME/gradle-8.7/bin" >> $GITHUB_PATH
+      - name: NDK + CMake
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "cmake;3.22.1" "ndk;26.1.10909125" "platforms;android-34" "build-tools;34.0.0"
       - run: git clone --depth 1 --branch v1.91.0 https://github.com/ocornut/imgui app/src/main/cpp/imgui
-      - run: gradle assembleDebug
+      - run: gradle assembleDebug --stacktrace
       - uses: actions/upload-artifact@v4
         with: { name: Loader-debug, path: app/build/outputs/apk/debug/*.apk }
