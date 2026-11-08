@@ -259,6 +259,10 @@ static void drawMenu(int w, int h) {
     if (ImGui::Button("Depth berikutnya")) g_depthIdx++;
     ImGui::Text("Matriks game: view=%d proj=%d", g_haveView, g_haveProj);
     ImGui::Separator(); ImGui::TextWrapped("%s", g_status.c_str());
+    ImGui::Separator(); ImGui::TextDisabled("Credit");
+    ImGui::TextWrapped("YouTube : youtube.com/@xeziez");
+    ImGui::TextWrapped("TikTok : tiktok.com/@initial_a.n");
+    ImGui::TextWrapped("GitHub : github.com/rintaga");
     ImGui::End(); ImGui::Render(); ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
